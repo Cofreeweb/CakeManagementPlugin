@@ -1,0 +1,186 @@
+
+img{max-width: 100%}
+
+/* Override Bootsrap*/
+.page-header {margin:0}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.margin-b-1 {
+  margin-bottom: 1em;
+}
+
+
+.pointer {
+  cursor: pointer;
+}
+.checkbox {
+  padding-left: 0;
+}
+
+
+table a{color: rgb(112, 112, 112)}
+
+/* Botones de acciones */
+.header-actions {margin-left: 25px}
+
+/* Botones de idiomas */
+
+/* Idiomas */
+.page-language {
+  position: relative;
+  border-bottom: 1px dotted #e5e5e5;
+	background-color: #eff3f8;
+  padding: 0;
+  display: block;
+	margin: 12px;
+}
+
+	.page-language .col-sm-2{margin-top: 8px}
+
+/* AMARILLO / ESPAÑOL */
+.btn-yellow,
+.btn-yellow:focus {
+  background-color: #ffb752 !important;
+  border-color: #ffb752;
+	color: #FFF !important;
+}
+.btn-yellow:hover,
+.open .btn-yellow.dropdown-toggle {
+  background-color: #e59729 !important;
+  border-color: #ffb752;
+}
+.btn-yellow.no-border:hover {
+  border-color: #e59729;
+}
+.btn-yellow.no-hover:hover {
+  background-color: #ffb752 !important;
+}
+.btn-yellow.active {
+  background-color: #f2a73e !important;
+  border-color: #f0981c;
+	text-shadow: 0 !important;
+}
+.btn-yellow.no-border.active {
+  background-color: #f1a02f !important;
+  border-color: #f1a02f;
+}
+.btn-yellow.disabled,
+.btn-yellow[disabled],
+fieldset[disabled] .btn-yellow,
+.btn-yellow.disabled:hover,
+.btn-yellow[disabled]:hover,
+fieldset[disabled] .btn-yellow:hover,
+.btn-yellow.disabled:focus,
+.btn-yellow[disabled]:focus,
+fieldset[disabled] .btn-yellow:focus,
+.btn-yellow.disabled:active,
+.btn-yellow[disabled]:active,
+fieldset[disabled] .btn-yellow:active,
+.btn-yellow.disabled.active,
+.btn-yellow[disabled].active,
+fieldset[disabled] .btn-yellow.active {
+  background-color: #ffb752 !important;
+  border-color: #ffb752;
+}
+
+/* GREEN / EUSKERA */
+.btn-green,
+.btn-green:focus {
+  background-color: #87b87f !important;
+  border-color: #87b87f;
+  color: #FFF !important;
+}
+.btn-green:hover,
+.open .btn-green.dropdown-toggle {
+  background-color: #629b58 !important;
+  border-color: #87b87f;
+}
+.btn-green.no-border:hover {
+  border-color: #629b58;
+}
+.btn-green.no-hover:hover {
+  background-color: #87b87f !important;
+}
+.btn-green.active {
+  background-color: #75aa6c !important;
+  border-color: #629959;
+}
+.btn-green.no-border.active {
+  background-color: #6ba462 !important;
+  border-color: #6ba462;
+}
+.btn-green.disabled,
+.btn-green[disabled],
+fieldset[disabled] .btn-green,
+.btn-green.disabled:hover,
+.btn-green[disabled]:hover,
+fieldset[disabled] .btn-green:hover,
+.btn-green.disabled:focus,
+.btn-green[disabled]:focus,
+fieldset[disabled] .btn-green:focus,
+.btn-green.disabled:active,
+.btn-green[disabled]:active,
+fieldset[disabled] .btn-green:active,
+.btn-green.disabled.active,
+.btn-green[disabled].active,
+fieldset[disabled] .btn-green.active {
+  background-color: #87b87f !important;
+  border-color: #87b87f;
+}
+
+
+
+input[type=checkbox].ace.ace-switch.ace-switch-4 + .lbl::before,
+input[type=checkbox].ace.ace-switch.ace-switch-5 + .lbl::before {
+  content: "ON\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0\a0OFF";
+  background-color: #dd5a43;
+  border: 1px solid #dd5a43;
+  color: #FFF;
+}
+
+input[type=checkbox].ace.ace-switch.ace-switch-4:checked + .lbl::before,
+input[type=checkbox].ace.ace-switch.ace-switch-5:checked + .lbl::before {
+  background-color: #69aa46;
+  border-color: #69aa46;
+}
+
+/* Editor CKEDITOR */
+.cke_chrome {
+  float: left;
+  margin-left: 7px !important;
+}
+
+/* Alertas */
+.alert {
+  position: absolute;
+  z-index: 990;
+  width: 50%;
+  margin: 0 auto;
+  left: 25%;
+  top: -20px;
+  -webkit-box-shadow: 0px 2px 5px rgba(50, 50, 50, 0.10);
+  -moz-box-shadow:    0px 2px 5px rgba(50, 50, 50, 0.10);
+  box-shadow:         0px 2px 5px rgba(50, 50, 50, 0.10);
+}
+
+/* Botones de aplicación */
+.btn.btn-app.btn-xs {
+  width: 150px;
+}
+
+/* Boton de ayuda */
+.help-button {
+    font-weight: normal;
+    line-height: 19px;
+    background-color: #ccc;
+}
+.help-button.hover {
+  background-color: #65BCDA;
+}
+.margin-top {
+  margin-top: 2em;
+}
