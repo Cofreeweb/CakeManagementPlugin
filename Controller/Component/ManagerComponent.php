@@ -20,6 +20,7 @@ class ManagerComponent extends Component
     if( isset( $controller->request->params ['admin']))
     {
       $controller->layout = 'admin';
+      App::build( array( 'View' => App::pluginPath( 'Management') .'View'. DS));
     }
   }
 
