@@ -10,10 +10,7 @@
 
 class ManagerComponent extends Component 
 {
-
-
-  var $components = array( 'Session');
-
+  public $components = array( 'Session');
 
   function initialize( Controller $controller, $settings = array()) 
   {
