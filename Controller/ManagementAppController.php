@@ -5,8 +5,11 @@
  * @link		http://milesj.me/code/cakephp/admin
  */
 
-App::uses('Admin', 'Management.Lib');
-App::uses('ActionLog', 'Management.Model');
+App::uses( 'Admin', 'Management.Lib');
+// App::uses('ActionLog', 'Management.Model');
+
+App::uses('Controller', 'AppController');
+
 
 /**
  * @property Model $Model

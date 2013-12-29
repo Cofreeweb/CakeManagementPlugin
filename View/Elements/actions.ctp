@@ -5,7 +5,7 @@
  */
 ?>
     <? if( $this->AdminNav->asActionButton( 'index') && $this->action != 'admin_index'): ?>
-        <?= $this->Html->link( '<i class="icon-list align-top bigger-125"></i> ' . __d( 'admin', 'Listado'), $this->AdminUtil->url( array(
+        <?= $this->Html->link( '<i class="icon-align-justify align-top bigger-125"></i> ' . __d( 'admin', 'Listado'), $this->AdminUtil->url( array(
             'action' => 'index'
         )), array(
             'class' => 'btn btn-sm btn-primary',
@@ -17,6 +17,15 @@
     <? if( $this->AdminNav->asActionButton( 'add') && $this->action != 'admin_add'): ?>
         <?= $this->Html->link( '<i class="icon-plus align-top bigger-125"></i> ' . __d( 'admin', 'Crear'), $this->AdminUtil->url( array(
             'action' => 'add'
+        )), array(
+            'class' => 'btn btn-sm btn-primary',
+            'escape' => false
+        )) ?>
+    <? endif ?>
+    
+    <? if( $this->AdminNav->asActionButton( 'create') && $this->action != 'create'): ?>
+        <?= $this->Html->link( '<i class="icon-plus align-top bigger-125"></i> ' . __d( 'admin', 'Crear'), $this->AdminUtil->url( array(
+            'action' => 'create'
         )), array(
             'class' => 'btn btn-sm btn-primary',
             'escape' => false

@@ -187,7 +187,11 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
 		                                
       $('[data-rel=tooltip]').tooltip({container:'body'});
       $('[data-rel=popover]').popover({container:'body'});
-      $('.date-picker').datepicker({autoclose:true, format: 'yyyy-mm-dd', language: 'es'}).next().on(ace.click_event, function(){
+      $('.date-picker').datepicker({
+          autoclose:true, 
+          format: 'yyyy-mm-dd', 
+          language: 'es'
+      }).next().on(ace.click_event, function(){
 				$(this).prev().focus();
 			});
     </script>

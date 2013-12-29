@@ -28,8 +28,8 @@ class ManagerComponent extends Component
   }
 
   function beforeRender( Controller $controller) 
-  {
-    if( isset( $controller->request->params ['admin']))
+  {    
+    if( isset( $controller->request->params ['admin']) || $controller->name == 'Crud')
     {
       $controller->helpers ['Form'] = array( 'className' => 'Management.AdminForm');
       $controller->helpers [] = 'Management.AdminUtil';

@@ -441,10 +441,10 @@ class AdminFormHelper extends FormHelper
             array(
                 'name' => 'document',
                 'groups' => array(
-                    'mode', 'document', 'doctools',
+                    'mode', 'document', 'doctools'
                 ),
                 'items' => array(
-                    'Source'
+                    'Source', 
                 )
             ),
         ),

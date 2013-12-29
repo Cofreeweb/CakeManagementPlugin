@@ -220,7 +220,6 @@ class AdminNavHelper extends AppHelper
   public function hasPermissions( $url)
   {
     $aro = array( 'model' => 'Group', 'foreign_key' => $this->Auth->user( 'group_id'));
-    
     $aco = 'controllers';
     
     if( !empty( $url ['plugin']))
@@ -238,7 +237,6 @@ class AdminNavHelper extends AppHelper
       $action = !empty( $url ['admin']) ? 'admin_'. $url ['action'] : $url ['action']; 
       $aco .= '/'. $action;
     }
-    
     $permission = $this->_getModel( 'Permission')->check( $aro, $aco);
     return $permission;
   }
