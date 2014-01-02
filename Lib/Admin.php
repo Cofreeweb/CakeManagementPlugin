@@ -310,22 +310,22 @@ class Admin {
             }
             
             // Files
-            if( !empty( $object->fieldsFiles))
+            if( !empty( $object->admin ['fieldsFiles']))
             {
-              foreach( $object->fieldsFiles as $field => $data)
+              foreach( $object->admin ['fieldsFiles'] as $field => $data)
               {
                 $relatedModel = isset( $object->hasMany [$field]) 
                   ? $object->hasMany [$field]
                   : $object->hasOne [$field];
                 
-                $object->fieldsFiles [$field] = array_merge( $object->fieldsFiles [$field], $relatedModel);
+                $object->admin ['fieldsFiles'] [$field] = array_merge( $object->admin ['fieldsFiles'] [$field], $relatedModel);
               }
             }
             
             // Index
-            if( !empty( $object->fieldsIndex))
+            if( !empty( $object->admin ['fieldsIndex']))
             {
-              foreach( $object->fieldsIndex as $key => $field)
+              foreach( $object->admin ['fieldsIndex'] as $key => $field)
               {
                 if( isset( $object->fields [$field]))
                 {
@@ -336,11 +336,30 @@ class Admin {
                   $data = $schema [$field];
                 }
                 
-                unset( $object->fieldsIndex [$key]);
-                $object->fieldsIndex [$field] = $data;
+                unset( $object->admin ['fieldsIndex'] [$key]);
+                $object->admin ['fieldsIndex'] [$field] = $data;
               }
             }
-
+            
+            // Search
+            if( !empty( $object->admin ['fieldsSearch']))
+            {
+              foreach( $object->admin ['fieldsSearch'] as $key => $field)
+              {
+                if( isset( $object->fields [$field]))
+                {
+                  $data = $object->fields [$field];
+                }
+                else
+                {
+                  $data = $schema [$field];
+                }
+                
+                unset( $object->admin ['fieldsSearch'] [$key]);
+                $object->admin ['fieldsSearch'] [$field] = $data;
+              }
+            }
+            
             // Apply default admin settings
             $settings = isset($object->admin) ? $object->admin : array();
             $defaultSettings = Configure::read('Admin.modelDefaults');

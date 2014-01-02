@@ -3,6 +3,6 @@
         'result' => $result,
         'field' => $field,
         'data' => $data,
-        'value' => $result[$model->alias][$field]
+        'value' => $result [$model->alias][$field],
     )); ?>
 </td>

@@ -251,59 +251,61 @@ class AdminToolbarComponent extends Component {
      * @param array $data
      * @return array
      */
-    public function parseFilterConditions(Model $model, $data) {
-        $conditions = array();
-        $fields = $model->fields;
-        $alias = $model->alias;
-        $enum = $model->enum;
+    public function parseFilterConditions(Model $model, $data) 
+    {
+      $conditions = array();
+      $fields = $model->fields;
+      $alias = $model->alias;
+      $enum = $model->enum;
 
-        foreach ($data as $key => $value) {
-            if (mb_substr($key, -7) === '_filter' || mb_substr($key, -11) === '_type_ahead') {
-                $data[$key] = urldecode($value);
-                continue;
+      foreach ($data as $key => $value) {
+          if (mb_substr($key, -7) === '_filter' || mb_substr($key, -11) === '_type_ahead') {
+              $data[$key] = urldecode($value);
+              continue;
 
-            } else if (!isset($fields[$key])) {
-                continue;
-            }
+          } else if (!isset($fields[$key])) {
+              continue;
+          }
 
-            $field = $fields[$key];
-            $value = urldecode($value);
+          $field = $fields[$key];
+          $value = urldecode($value);
 
-            // Dates, times, numbers
-            if (isset($data[$key . '_filter'])) {
-                $operator = $data[$key . '_filter'];
-                $operator = ($operator === '=') ? '' : ' ' . $operator;
+          // Dates, times, numbers
+          if (isset($data[$key . '_filter'])) {
+              $operator = $data[$key . '_filter'];
+              $operator = ($operator === '=') ? '' : ' ' . $operator;
 
-                if ($field['type'] === 'datetime') {
-                    $value = date('Y-m-d H:i:s', strtotime($value));
+              if ($field['type'] === 'datetime') {
+                  $value = date('Y-m-d H:i:s', strtotime($value));
 
-                } else if ($field['type'] === 'date') {
-                    $value = date('Y-m-d', strtotime($value));
+              } else if ($field['type'] === 'date') {
+                  $value = date('Y-m-d', strtotime($value));
 
-                } else if ($field['type'] === 'time') {
-                    $value = date('H:i:s', strtotime($value));
-                }
+              } else if ($field['type'] === 'time') {
+                  $value = date('H:i:s', strtotime($value));
+              }
 
-                $conditions[$alias . '.' . $key . $operator] = $value;
+              $conditions[$alias . '.' . $key . $operator] = $value;
 
-            // Enums, booleans, relations
-            } else if (isset($enum[$key]) || $field['type'] === 'boolean' || !empty($field['belongsTo'])) {
-                $conditions[$alias . '.' . $key] = $value;
+          // Enums, booleans, relations
+          } else if (isset($enum[$key]) || $field['type'] === 'boolean' || !empty($field['belongsTo'])) {
+              $conditions[$alias . '.' . $key] = $value;
+          } else if( $field ['type'] == 'list') {
+              $conditions[$alias . '.' . $key] = $value;
+          // Strings
+          } else {
+              $conditions[$alias . '.' . $key . ' LIKE'] = '%' . $value . '%';
+          }
+      }
 
-            // Strings
-            } else {
-                $conditions[$alias . '.' . $key . ' LIKE'] = '%' . $value . '%';
-            }
-        }
+      // Set data to use in form
+      if (isset($this->Controller->request->data[$model->alias])) {
+          $data = array_merge($this->Controller->request->data[$model->alias], $data);
+      }
 
-        // Set data to use in form
-        if (isset($this->Controller->request->data[$model->alias])) {
-            $data = array_merge($this->Controller->request->data[$model->alias], $data);
-        }
+      $this->Controller->request->data[$model->alias] = $data;
 
-        $this->Controller->request->data[$model->alias] = $data;
-
-        return $conditions;
+      return $conditions;
     }
 
     /**

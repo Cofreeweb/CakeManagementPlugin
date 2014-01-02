@@ -8873,7 +8873,6 @@ td .lbl:only-child {
   position: relative;
   overflow: hidden;
   margin: 2px;
-  border: 2px solid #333;
   /* the custom text on hover */
 
 }

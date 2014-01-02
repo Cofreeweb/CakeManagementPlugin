@@ -6,7 +6,7 @@ if ($this->action === 'read') {
 
     } else { ?>
 
-        <span class="type text"><?php echo nl2br(h($value)); ?></span>
+        <span class="type text"><?= nl2br(h($value)); ?></span>
 
     <?php }
 // Else show trimmed version

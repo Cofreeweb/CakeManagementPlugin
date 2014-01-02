@@ -23,6 +23,7 @@
 			<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 				<li>
 					<a href="<?= $this->Html->url( array(
+					  'admin' => true,
 					  'plugin' => 'acl',
 					  'controller' => 'users',
 					  'action' => 'edit'

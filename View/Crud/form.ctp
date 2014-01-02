@@ -16,14 +16,14 @@
         'class' => 'form-horizontal', 
         'role' => 'form'
     )) ?>
-    <? if( !empty( $model->fieldsFiles)): ?>
+    <? if( !empty( $model->admin ['fieldsFiles'])): ?>
         <div class="tabbable">
           <ul id="myTab" class="nav nav-tabs">
             <li class="active">
           		<a href="#manager-form" data-toggle="tab"><i class="green icon-edit bigger-110"></i> <?= __d( "admin", "Datos") ?></a>
           	</li>
             
-            <? foreach( $model->fieldsFiles as $field => $info): ?>
+            <? foreach( $model->admin ['fieldsFiles'] as $field => $info): ?>
                 <li>
               		<a href="#manager-<?= $field ?>" data-toggle="tab"><i class="green icon-camera bigger-110"></i> <?= $info ['title'] ?></a>
               	</li>
@@ -31,7 +31,7 @@
           </ul>
     <? endif ?>
     
-    <? if( !empty( $model->fieldsFiles)): ?>
+    <? if( !empty( $model->admin ['fieldsFiles'])): ?>
         <div class="tab-content">
           <div class="tab-pane in active" id="manager-form">
     <? endif ?>
@@ -43,10 +43,10 @@
     <?#= $this->element('form_actions') ?>
     
     
-    <? if( !empty( $model->fieldsFiles)): ?>
+    <? if( !empty( $model->admin ['fieldsFiles'])): ?>
         </div>
         
-        <? foreach( $model->fieldsFiles as $field => $info): ?>
+        <? foreach( $model->admin ['fieldsFiles'] as $field => $info): ?>
             <div class="tab-pane in" id="manager-<?= $field ?>">
               <?= $this->Upload->multiple( array(
                   'key' => $info ['content_type'],
@@ -60,7 +60,7 @@
         <? endforeach ?>
     <? endif ?>
     
-    <? if( !empty( $model->fieldsFiles)): ?>
+    <? if( !empty( $model->admin ['fieldsFiles'])): ?>
           </div>
         </div>
     <? endif ?>

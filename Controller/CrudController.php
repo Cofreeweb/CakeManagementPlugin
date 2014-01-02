@@ -9,7 +9,7 @@ App::uses( 'ManagementAppController', 'Management.Controller');
 App::uses( 'Admin', 'Management.Lib');
 
 
-class CrudController extends ManagementAppController {
+class CrudController extends ManagementAppController { 
 
     /**
      * List out and paginate all the records in the model.
@@ -28,8 +28,8 @@ class CrudController extends ManagementAppController {
         $this->AdminToolbar->setBelongsToData($this->Model);
 
         // Filters
-        if (!empty($this->request->params['named'])) {
-            $this->paginate['conditions'] = $this->AdminToolbar->parseFilterConditions($this->Model, $this->request->params['named']);
+        if (!empty($this->request->query)) {
+            $this->paginate['conditions'] = $this->AdminToolbar->parseFilterConditions($this->Model, $this->request->query);
         }
 
         // Batch delete
@@ -164,11 +164,11 @@ class CrudController extends ManagementAppController {
                 $this->Model->set($result);
                 // $this->AdminToolbar->logAction(ActionLog::UPDATE, $this->Model, $id);
 
-                $this->Manager->flashSuccess(__d('admin', 'Successfully updated %s with ID %s', array(mb_strtolower($this->Model->singularName), $id)));
+                $this->Manager->flashSuccess( __d('admin', 'El contenido se ha guardado correctamente'));
                 $this->AdminToolbar->redirectAfter($this->Model, 'update');
 
             } else {
-                $this->Manager->flashError(__d('admin', 'Failed to update %s with ID %s', array(mb_strtolower($this->Model->singularName), $id)), 'is-error');
+                $this->Manager->flashError( __d('admin', 'No ha podido guardarse el contenido'));
             }
         } else {
             $this->request->data = $result;
