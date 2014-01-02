@@ -21,7 +21,8 @@
       '/management/css/ace-fonts',
       '/management/css/ace',
       '/management/css/ace-rtl',
-      '/management/css/ace-skins.min'
+      '/management/css/ace-skins.min',
+      '/management/css/admin.css'
     )) ?>
     
     
@@ -57,6 +58,8 @@
 	</head>
 
 	<body class="login-layout">
+	  <?= $this->Session->flash() ?>
+	  
 		<div class="main-container">
 			<div class="main-content">
 				<?= $this->fetch( 'content')?>
@@ -93,4 +96,5 @@
 			}
 		</script>
 	</body>
+	<?= $this->fetch( 'script') ?>
 </html>

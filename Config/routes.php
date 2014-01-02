@@ -12,8 +12,15 @@
 // Router::connect('/admin/:action/*', array('plugin' => 'admin', 'controller' => 'admin'));
 
 
+Router::connect( '/admin', array(
+    'admin' => true,
+    'controller' => 'pages', 
+    'action' => 'display', 
+    'admin_dashboard'
+));
 
-foreach( Configure::read( 'Management.crud') as $model)
+
+foreach( (array)Configure::read( 'Management.crud') as $model)
 {
   Router::connect('/admin/'. Inflector::tableize( $model) .'/:action/*', array(
       'admin' => false,
