@@ -91,13 +91,14 @@ class ManagementAppController extends AppController {
 			return true;
 		}
 
-		throw new UnauthorizedException(__d('admin', 'Insufficient Access Permissions'));
+		throw new UnauthorizedException( __d('admin', 'Insufficient Access Permissions'));
 	}
 
 	/**
 	 * Before filter.
 	 */
 	public function beforeFilter() {
+    
 		parent::beforeFilter();
 
 		// Set locale

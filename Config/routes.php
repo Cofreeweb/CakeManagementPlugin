@@ -14,15 +14,14 @@
 
 Router::connect( '/admin', array(
     'admin' => true,
-    'controller' => 'pages', 
-    'action' => 'display', 
-    'admin_dashboard'
+    'plugin' => 'management',
+    'controller' => 'mng_dashboard', 
+    'action' => 'index', 
 ));
-
 
 foreach( (array)Configure::read( 'Management.crud') as $model)
 {
-  Router::connect('/admin/'. Inflector::tableize( $model) .'/:action/*', array(
+  Router::connect( '/admin/'. Inflector::tableize( $model) .'/:action/*', array(
       'admin' => false,
       'plugin' => 'management', 
       'controller' => 'crud',

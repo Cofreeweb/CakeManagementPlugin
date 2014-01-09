@@ -137,41 +137,50 @@ class CrudController extends ManagementAppController {
      * @throws NotFoundException
      * @throws ForbiddenException
      */
-    public function update($id) {
-        if (!$this->Model->admin['editable']) {
-            throw new ForbiddenException(__d('admin', 'Update Access Protected'));
+    public function update($id) 
+    {
+        if (!$this->Model->admin['editable']) 
+        {
+          throw new ForbiddenException(__d('admin', 'Update Access Protected'));
         }
 
-        if ($this->overrideAction('update', $id)) {
-            return;
+        if ($this->overrideAction('update', $id)) 
+        {
+          return;
         }
 
         $this->Model->id = $id;
 
         $result = $this->AdminToolbar->getRecordById($this->Model, $id, true);
 
-        if (!$result) {
-            throw new NotFoundException(__d('admin', '%s Not Found', $this->Model->singularName));
+        if (!$result) 
+        {
+          throw new NotFoundException(__d('admin', '%s Not Found', $this->Model->singularName));
         }
 
         $this->AdminToolbar->setBelongsToData($this->Model);
         $this->AdminToolbar->setHabtmData($this->Model);
 
-        if ($this->request->is('put')) {
-            $data = $this->AdminToolbar->getRequestData();
+        if ($this->request->is('put')) 
+        {
+          $data = $this->AdminToolbar->getRequestData();
 
-            if ($this->Model->saveAll($data, array('validate' => 'first', 'atomic' => true, 'deep' => true))) {
-                $this->Model->set($result);
-                // $this->AdminToolbar->logAction(ActionLog::UPDATE, $this->Model, $id);
+          if ($this->Model->saveAll($data, array('validate' => 'first', 'atomic' => true, 'deep' => true))) 
+          {
+            $this->Model->set($result);
+            // $this->AdminToolbar->logAction(ActionLog::UPDATE, $this->Model, $id);
 
-                $this->Manager->flashSuccess( __d('admin', 'El contenido se ha guardado correctamente'));
-                $this->AdminToolbar->redirectAfter($this->Model, 'update');
-
-            } else {
-                $this->Manager->flashError( __d('admin', 'No ha podido guardarse el contenido'));
-            }
-        } else {
-            $this->request->data = $result;
+            $this->Manager->flashSuccess( __d('admin', 'El contenido se ha guardado correctamente'));
+            $this->AdminToolbar->redirectAfter($this->Model, 'update');
+          } 
+          else 
+          {
+              $this->Manager->flashError( __d('admin', 'No ha podido guardarse el contenido'));
+          }
+        } 
+        else 
+        {
+          $this->request->data = $result;
         }
 
         $this->set('result', $result);
@@ -377,11 +386,10 @@ class CrudController extends ManagementAppController {
     protected function overrideAction($action, $id = null) {
         $overrides = Configure::read('Admin.actionOverrides');
         $model = $this->Model->qualifiedName;
-
         if (empty($overrides[$model][$action])) {
             return false;
         }
-
+        
         $url = (array) $overrides[$model][$action];
         $url[] = $id;
 

@@ -384,7 +384,10 @@ class AdminFormHelper extends FormHelper
  */
   public function hasTranslation( $model, $field)
   {
-    return isset( $model->actsAs ['Translate']) && isset( $model->actsAs ['Translate'][$field]);
+    $return = $model->Behaviors->hasMethod( 'translateModel') 
+        && array_key_exists( Inflector::camelize( Inflector::pluralize( $field)), $model->hasMany);
+    
+    return $return;
   }
   
   
@@ -483,8 +486,13 @@ EOF;
  *
  * @return void
  */
-  public function localeNav()
+  public function localeNav( $return = true)
   {
+    if( !$return)
+    {
+      return;
+    }
+    
     $locales = Configure::read( 'Config.languages');
 
     $Locale = ClassRegistry::init( 'I18n.Locale');

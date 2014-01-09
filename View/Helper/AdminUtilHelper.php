@@ -22,8 +22,8 @@ class AdminUtilHelper extends AppHelper
  */
   public function url( $params = array())
   {
-    $route = Router::currentRoute();
-    
+    $route = Router::requestRoute( true);
+
     // Las keys de la ruta, definidos en Router::connect( :key1/:key2)
     $keys = $route->keys;
     
@@ -39,6 +39,11 @@ class AdminUtilHelper extends AppHelper
       }
     }
     
+    if( !isset( $defaults ['admin']))
+    {
+      $defaults ['admin'] = false;
+    }
+
     return array_merge( $defaults, $params);
   }
   

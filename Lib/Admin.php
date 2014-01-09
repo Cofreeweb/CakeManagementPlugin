@@ -12,7 +12,35 @@ class Admin {
      * @type array
      */
     protected static $_cache = array();
+    
+    public function loadCruds()
+    {
+      $path = APP . 'Config' .DS. 'cruds.php';
 
+      if( file_exists( $path))
+      {
+        Configure::load( 'cruds');
+      }
+
+      $plugins = App::objects( 'plugin');
+
+      foreach( $plugins as $plugin)
+      {
+        if( CakePlugin::loaded( $plugin))
+        {
+          $path = App::pluginPath( $plugin) . 'Config'. DS. 'cruds.php';
+
+          if( file_exists( $path))
+          {
+            Configure::load( $plugin .'.cruds');
+          }
+        }
+      }
+      
+      $config = Configure::read( 'cruds');
+      Configure::write( 'Management.crud', $config);
+    }
+    
     /**
      * Cache the result of the callback into the class.
      *
@@ -240,13 +268,15 @@ class Admin {
             $object->cacheQueries = false;
             $object->recursive = -1;
 
-            if ($plugin !== 'Core') {
-                $object->plugin = $plugin;
+            if ($plugin !== 'Core') 
+            {
+              $object->plugin = $plugin;
             }
 
             // Inherit enums from parent classes
-            if ($object->Behaviors->hasMethod('enum')) {
-                $object->enum = $object->enum();
+            if ($object->Behaviors->hasMethod('enum')) 
+            {
+              $object->enum = $object->enum();
             }
 
             // Generate readable names
@@ -257,30 +287,43 @@ class Admin {
 
             // Generate a list of field (database column) data
             $schema = $object->schema();
+            
+            foreach( $schema as $key => $data)
+            {
+              $schema [$key]['title'] = Inflector::humanize( $key);
+            }
+            
             $hideFields = array();
             
             if( empty( $object->fields))
             {
-              foreach ($fields as $field => &$data) {
-                  if ($field === 'id') {
-                      $data['title'] = 'ID';
-                  } else {
-                      $data['title'] = Inflector::humanize(Inflector::underscore(str_replace('_id', '', $field)));
-                  }
+              foreach ($fields as $field => &$data) 
+              {
+                if ($field === 'id') 
+                {
+                  $data['title'] = 'ID';
+                } 
+                else 
+                {
+                  $data['title'] = Inflector::humanize(Inflector::underscore(str_replace('_id', '', $field)));
+                }
 
-                  if (isset($object->enum[$field])) {
-                      $data['type'] = 'enum';
-                  }
+                if (isset($object->enum[$field])) 
+                {
+                  $data['type'] = 'enum';
+                }
 
-                  // Hide counter cache and auto-date fields
-                  if (in_array($field, array('created', 'modified')) || mb_substr($field, -6) === '_count') {
-                      $hideFields[] = $field;
-                  }
+                // Hide counter cache and auto-date fields
+                if (in_array($field, array('created', 'modified')) || mb_substr($field, -6) === '_count') 
+                {
+                  $hideFields[] = $field;
+                }
               }
               
-              foreach ($object->belongsTo as $alias => $assoc) {
-                  $fields[$assoc['foreignKey']]['type'] = 'relation';
-                  $fields[$assoc['foreignKey']]['belongsTo'][$alias] = $assoc['className'];
+              foreach ($object->belongsTo as $alias => $assoc) 
+              {
+                $fields[$assoc['foreignKey']]['type'] = 'relation';
+                $fields[$assoc['foreignKey']]['belongsTo'][$alias] = $assoc['className'];
               }
 
               $object->fields = $fields;
@@ -361,26 +404,44 @@ class Admin {
             }
             
             // Apply default admin settings
-            $settings = isset($object->admin) ? $object->admin : array();
-            $defaultSettings = Configure::read('Admin.modelDefaults');
+            $settings = isset( $object->admin) ? $object->admin : array();
+            $defaultSettings = Configure::read( 'Admin.modelDefaults');
 
-            if (is_array($settings)) {
-                $settings = Hash::merge($defaultSettings, $settings);
-                $settings['fileFields'] = array_merge($settings['fileFields'], $settings['imageFields']);
-                $settings['hideFields'] = array_merge($settings['hideFields'], $hideFields);
+            if( is_array( $settings)) 
+            {
+              $settings = Hash::merge( $defaultSettings, $settings);
+              $settings['fileFields'] = array_merge( $settings['fileFields'], $settings['imageFields']);
+              $settings['hideFields'] = array_merge( $settings['hideFields'], $hideFields);
 
-                $object->admin = $settings;
-            } else {
-                $object->admin = $defaultSettings;
+              $object->admin = $settings;
+            } 
+            else 
+            {
+              $object->admin = $defaultSettings;
             }
 
             // Update associated settings
-            foreach ($object->hasAndBelongsToMany as &$assoc) {
-                $assoc = array_merge(array('showInForm' => true), $assoc);
+            foreach( $object->hasAndBelongsToMany as &$assoc) 
+            {
+              $assoc = array_merge( array( 'showInForm' => true), $assoc);
             }
 
             return $object;
         });
     }
-
+    
+    
+    public function modelName( $model)
+    {
+      $parents = class_parents( $model);
+      
+      $parent = current( $parents);
+      
+      if( $parent != 'AppModel')
+      {
+        return str_replace( 'AppModel', '', $parent) . '.'. $model->name;
+      }
+      
+      return $model->name;
+    }
 }
