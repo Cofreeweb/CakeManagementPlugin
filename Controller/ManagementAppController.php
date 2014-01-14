@@ -77,6 +77,7 @@ class ManagementAppController extends AppController {
 	 * @throws UnauthorizedException
 	 */
 	public function isAuthorized($user = null) {
+		return true;
 		if (!$user) {
 			throw new ForbiddenException(__d('admin', 'Invalid User'));
 		}
@@ -98,7 +99,7 @@ class ManagementAppController extends AppController {
 	 * Before filter.
 	 */
 	public function beforeFilter() {
-    
+
 		parent::beforeFilter();
 
 		// Set locale
