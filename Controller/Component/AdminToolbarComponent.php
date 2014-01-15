@@ -257,7 +257,7 @@ class AdminToolbarComponent extends Component {
       $fields = $model->fields;
       $alias = $model->alias;
       $enum = $model->enum;
-
+      
       foreach ($data as $key => $value) {
           if (mb_substr($key, -7) === '_filter' || mb_substr($key, -11) === '_type_ahead') {
               $data[$key] = urldecode($value);
@@ -269,7 +269,12 @@ class AdminToolbarComponent extends Component {
 
           $field = $fields[$key];
           $value = urldecode($value);
-
+          $db = $model->getDataSource();
+          
+          $LIKE = strpos( $db->description, 'PostgreSQL') !== false
+              ? 'ILIKE'
+              : 'LIKE';
+              
           // Dates, times, numbers
           if (isset($data[$key . '_filter'])) {
               $operator = $data[$key . '_filter'];
@@ -294,7 +299,7 @@ class AdminToolbarComponent extends Component {
               $conditions[$alias . '.' . $key] = $value;
           // Strings
           } elseif( !empty( $value)) {
-              $conditions[$alias . '.' . $key . ' LIKE'] = '%' . $value . '%';
+              $conditions[$alias . '.' . $key . ' '. $LIKE] = '%' . $value . '%';
           }
       }
 
@@ -304,6 +309,7 @@ class AdminToolbarComponent extends Component {
       }
 
       $this->Controller->request->data[$model->alias] = $data;
+
       return $conditions;
     }
 
