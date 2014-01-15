@@ -31,7 +31,7 @@ class CrudController extends ManagementAppController {
         if (!empty($this->request->query)) {
             $this->paginate['conditions'] = $this->AdminToolbar->parseFilterConditions($this->Model, $this->request->query);
         }
-
+        
         // Batch delete
         if ($this->request->is('post')) {
             if (!$this->Model->admin['batchProcess']) {

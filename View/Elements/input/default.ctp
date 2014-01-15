@@ -34,6 +34,12 @@ if( !empty( $data ['options']))
 {
   $params ['options'] = $data ['options'];
 }
+
+if( !empty( $data ['empty']))
+{
+  $params ['empty'] = $data ['empty'];
+}
+
 if ($this->action === 'index') {
     unset($params['class']);
 }

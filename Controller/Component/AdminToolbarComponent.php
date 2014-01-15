@@ -290,10 +290,10 @@ class AdminToolbarComponent extends Component {
           // Enums, booleans, relations
           } else if (isset($enum[$key]) || $field['type'] === 'boolean' || !empty($field['belongsTo'])) {
               $conditions[$alias . '.' . $key] = $value;
-          } else if( $field ['type'] == 'list') {
+          } else if( $field ['type'] == 'list' && !empty( $value)) {
               $conditions[$alias . '.' . $key] = $value;
           // Strings
-          } else {
+          } elseif( !empty( $value)) {
               $conditions[$alias . '.' . $key . ' LIKE'] = '%' . $value . '%';
           }
       }
@@ -304,7 +304,6 @@ class AdminToolbarComponent extends Component {
       }
 
       $this->Controller->request->data[$model->alias] = $data;
-
       return $conditions;
     }
 
