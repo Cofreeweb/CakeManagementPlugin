@@ -98,7 +98,7 @@ class ManagementAppController extends AppController {
 	 * Before filter.
 	 */
 	public function beforeFilter() {
-    
+
 		parent::beforeFilter();
 
 		// Set locale
