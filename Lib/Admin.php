@@ -297,28 +297,7 @@ class Admin {
             
             if( empty( $object->fields))
             {
-              foreach ($fields as $field => &$data) 
-              {
-                if ($field === 'id') 
-                {
-                  $data['title'] = 'ID';
-                } 
-                else 
-                {
-                  $data['title'] = Inflector::humanize(Inflector::underscore(str_replace('_id', '', $field)));
-                }
-
-                if (isset($object->enum[$field])) 
-                {
-                  $data['type'] = 'enum';
-                }
-
-                // Hide counter cache and auto-date fields
-                if (in_array($field, array('created', 'modified')) || mb_substr($field, -6) === '_count') 
-                {
-                  $hideFields[] = $field;
-                }
-              }
+              $fields = array();
               
               foreach ($object->belongsTo as $alias => $assoc) 
               {
@@ -336,11 +315,37 @@ class Admin {
                 {
                   $object->fields [$data] = $schema [$data];
                   unset( $object->fields [$field]);
+                  $field = $data;
+                  $data = $object->fields [$field]; 
                 }
                 else
                 {
                   $object->fields [$field] = array_merge( $schema [$field], $object->fields [$field]);
-                }                
+                }
+                
+                // Is a belongsTo foreign_key
+                if( $object->isForeignKey( $field))
+                {
+                  foreach( $object->belongsTo as $_model => $info)
+                  {
+                    if( $field == $info ['foreignKey'])
+                    {
+                      $data ['type'] = 'list';
+                      $data ['options'] = $object->$_model->find( 'list', $info);
+
+                      if( ($data ['title'] == Inflector::humanize( $field) || empty( $data ['title'])) && isset( $object->$_model->admin ['nameSingular']))
+                      {
+                        $data ['title'] = $object->$_model->admin ['nameSingular'];
+                      }
+                      
+                      $object->fields [$field] = $data;
+                      break;
+                    }
+                  }
+                }
+                
+                
+
               }
               
               foreach( $object->fields as $field => $data)

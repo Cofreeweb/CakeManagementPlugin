@@ -77,7 +77,6 @@ class ManagementAppController extends AppController {
 	 * @throws UnauthorizedException
 	 */
 	public function isAuthorized($user = null) {
-		return true;
 		if (!$user) {
 			throw new ForbiddenException(__d('admin', 'Invalid User'));
 		}
