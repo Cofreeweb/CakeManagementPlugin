@@ -12,12 +12,12 @@
 // Router::connect('/admin/:action/*', array('plugin' => 'admin', 'controller' => 'admin'));
 
 
-Router::connect( '/admin', array(
-    'admin' => true,
-    'controller' => 'pages', 
-    'action' => 'display', 
-    'admin_dashboard'
-));
+// Router::connect( '/admin', array(
+//     'admin' => true,
+//     'controller' => 'pages', 
+//     'action' => 'display', 
+//     'admin_dashboard'
+// ));
 
 
 foreach( (array)Configure::read( 'Management.crud') as $model)
