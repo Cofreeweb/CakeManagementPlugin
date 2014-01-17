@@ -16,6 +16,8 @@
         )) ?>
 
           <? foreach( $model->admin ['fieldsSearch'] as $field => $data): ?>
+              <? $data ['empty'] = __d( 'admin', '-- Todos --') ?>
+              
               <?= $this->element( 'Management.input', array(
                   'field' => $field,
                   'data' => $data

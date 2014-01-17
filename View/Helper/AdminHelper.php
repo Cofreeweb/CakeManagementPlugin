@@ -5,7 +5,7 @@
  * @link        http://milesj.me/code/cakephp/admin
  */
 
-App::uses('Admin', 'Admin.Lib');
+App::uses('Admin', 'Management.Lib');
 
 class AdminHelper extends AppHelper {
 

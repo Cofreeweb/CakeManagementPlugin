@@ -5,7 +5,7 @@
  * @link        http://milesj.me/code/cakephp/admin
  */
 
-App::uses('Admin', 'Admin.Lib');
+App::uses('Admin', 'Management.Lib');
 
 /**
  * @property Controller $Controller
@@ -174,7 +174,7 @@ class AdminToolbarComponent extends Component {
                       }
                   }
                 }
-                
+
             }
         }
 
@@ -251,13 +251,13 @@ class AdminToolbarComponent extends Component {
      * @param array $data
      * @return array
      */
-    public function parseFilterConditions(Model $model, $data) 
+    public function parseFilterConditions(Model $model, $data)
     {
       $conditions = array();
       $fields = $model->fields;
       $alias = $model->alias;
       $enum = $model->enum;
-
+      
       foreach ($data as $key => $value) {
           if (mb_substr($key, -7) === '_filter' || mb_substr($key, -11) === '_type_ahead') {
               $data[$key] = urldecode($value);
@@ -269,7 +269,12 @@ class AdminToolbarComponent extends Component {
 
           $field = $fields[$key];
           $value = urldecode($value);
-
+          $db = $model->getDataSource();
+          
+          $LIKE = strpos( $db->description, 'PostgreSQL') !== false
+              ? 'ILIKE'
+              : 'LIKE';
+              
           // Dates, times, numbers
           if (isset($data[$key . '_filter'])) {
               $operator = $data[$key . '_filter'];
@@ -290,11 +295,11 @@ class AdminToolbarComponent extends Component {
           // Enums, booleans, relations
           } else if (isset($enum[$key]) || $field['type'] === 'boolean' || !empty($field['belongsTo'])) {
               $conditions[$alias . '.' . $key] = $value;
-          } else if( $field ['type'] == 'list') {
+          } else if( $field ['type'] == 'list' && !empty( $value)) {
               $conditions[$alias . '.' . $key] = $value;
           // Strings
-          } else {
-              $conditions[$alias . '.' . $key . ' LIKE'] = '%' . $value . '%';
+          } elseif( !empty( $value)) {
+              $conditions[$alias . '.' . $key . ' '. $LIKE] = '%' . $value . '%';
           }
       }
 
@@ -316,9 +321,9 @@ class AdminToolbarComponent extends Component {
      */
     public function redirectAfter(Model $model, $action = null) {
         $url = array(
-            'plugin' => 'management', 
-            'controller' => 'crud', 
-            'action' => $action, 
+            'plugin' => 'management',
+            'controller' => 'crud',
+            'action' => $action,
             'model' => $model->alias
         );
 
@@ -329,7 +334,7 @@ class AdminToolbarComponent extends Component {
                 $url[] = $model->id;
             break;
         }
-        
+
         $this->Controller->redirect($url);
     }
 

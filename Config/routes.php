@@ -12,17 +12,25 @@
 // Router::connect('/admin/:action/*', array('plugin' => 'admin', 'controller' => 'admin'));
 
 
+<<<<<<< HEAD
 // Router::connect( '/admin', array(
 //     'admin' => true,
 //     'controller' => 'pages', 
 //     'action' => 'display', 
 //     'admin_dashboard'
 // ));
-
+=======
+Router::connect( '/admin', array(
+    'admin' => true,
+    'plugin' => 'management',
+    'controller' => 'mng_dashboard', 
+    'action' => 'index', 
+));
+>>>>>>> 04d66fdbc5d63753d0f855f76ce1c570ae818cd0
 
 foreach( (array)Configure::read( 'Management.crud') as $model)
 {
-  Router::connect('/admin/'. Inflector::tableize( $model) .'/:action/*', array(
+  Router::connect( '/admin/'. Inflector::tableize( $model) .'/:action/*', array(
       'admin' => false,
       'plugin' => 'management', 
       'controller' => 'crud',

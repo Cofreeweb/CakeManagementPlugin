@@ -57,7 +57,7 @@ $this->Paginator->options(array(
                               <td class="center">
                                   <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                         							<?= $this->Html->link( '<i class="icon-pencil bigger-120"></i>', array(
-                        							    'model' => $model->alias,
+                        							    'model' => Admin::modelName( $model),
                         							    'action' => 'update',
                               			      $result [$model->alias]['id']
                               			  ), array(
@@ -66,7 +66,7 @@ $this->Paginator->options(array(
                               			  )) ?>
 
                               			  <?= $this->Html->link( '<i class="icon-trash bigger-120"></i>', array(
-                              			      'model' => $model->alias,
+                              			      'model' => Admin::modelName( $model),
                         							    'action' => 'delete',
                               			      $result [$model->alias]['id']
                               			  ), array(

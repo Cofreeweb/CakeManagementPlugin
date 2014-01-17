@@ -3,6 +3,9 @@
 // Configuración de los colores de los idiomas en el admin
 Configure::load( 'Management.langcolors');
 
+App::uses( 'Admin', 'Management.Lib');
+Admin::loadCruds();
+
 define('ADMIN_PLUGIN', dirname(__DIR__) . '/');
 
 // User model
@@ -115,7 +118,7 @@ Configure::write('Admin.modelLinks', array());
  *
  * @link http://milesj.me/code/cakephp/admin#action-overrides
  */
-Configure::write('Admin.actionOverrides', array());
+// Configure::write('Admin.actionOverrides', array());
 
 /**
  * Provide overrides for CRUD views.
@@ -239,3 +242,5 @@ if (!Configure::check('User.routes')) {
         'profile' => array('plugin' => false, 'admin' => false, 'controller' => 'users', 'action' => 'profile', '{id}') // {slug}, {username}
     ));
 }
+
+Configure::load( 'management');
