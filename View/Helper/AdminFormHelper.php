@@ -447,7 +447,16 @@ class AdminFormHelper extends FormHelper
                     'mode', 'document', 'doctools'
                 ),
                 'items' => array(
-                    'Source', 
+                    'Source' 
+                )
+            ),
+            array(
+                'name' => 'video',
+                'groups' => array(
+                    'video'
+                ),
+                'items' => array(
+                    'oembed'
                 )
             ),
         ),
@@ -473,6 +482,7 @@ class AdminFormHelper extends FormHelper
     
     $js = <<<EOF
     $(".$class").ckeditor($json);
+    
 EOF;
     
     $this->Js->buffer( $js);

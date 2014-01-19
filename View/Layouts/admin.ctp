@@ -165,7 +165,8 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
       '/management/js/ckeditor/adapters/jquery',
       '/management/js/x-editable/bootstrap-editable.min.js',
       '/management/js/x-editable/ace-editable.min.js',
-      '/management/js/select2.min.js'
+      '/management/js/select2.min.js',
+      '/management/js/jquery.nestable.min.js'
     )) ?>
     
 
