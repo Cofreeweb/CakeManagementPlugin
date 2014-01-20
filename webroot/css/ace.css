@@ -8876,6 +8876,10 @@ td .lbl:only-child {
   /* the custom text on hover */
 
 }
+.ace-thumbnails > li.upload-doc {
+  float: none;
+  padding: 7px 0;
+}
 .ace-thumbnails > li > :first-child {
   display: block;
   position: relative;
