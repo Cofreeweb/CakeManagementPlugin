@@ -10,7 +10,7 @@
       <p><?= $message ?></p>
     </div>
     
-    <? $this->append( 'script') ?>
+    <? $this->append( 'scripts') ?>
     <script type="text/javascript">
       $(function(){
           var height = $("#flash_message").height();

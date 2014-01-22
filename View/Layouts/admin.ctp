@@ -197,6 +197,7 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
 			});
     </script>
     <?= $this->fetch( 'script') ?>
+    <?= $this->fetch( 'scripts') ?>
     <?= $this->fetch( 'css') ?>
     <?= $this->Js->writeBuffer() ?>
 		

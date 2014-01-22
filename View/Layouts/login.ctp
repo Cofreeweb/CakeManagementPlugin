@@ -97,4 +97,5 @@
 		</script>
 	</body>
 	<?= $this->fetch( 'script') ?>
+	<?= $this->fetch( 'scripts') ?>
 </html>
