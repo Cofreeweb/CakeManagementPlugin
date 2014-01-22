@@ -4,9 +4,8 @@
 
 <? else: ?>
   <? $this->AdminNav->setTitle( '<i class="icon-list"></i> ' . $model->admin ['namePlural'] .'  / Editar') ?>
-  <?= $this->AdminNav->setActionButtons( array( 'create', 'index')) ?>
+  <?= $this->AdminNav->setActionButtons( $model->admin ['actions']) ?>
 <? endif ?>
-
 <?#= $this->Admin->setBreadcrumbs($model, $result, $this->action) ?>
 
 

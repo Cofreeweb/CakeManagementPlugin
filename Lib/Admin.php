@@ -13,6 +13,13 @@ class Admin {
      */
     protected static $_cache = array();
     
+    protected static $_adminDefaults = array(
+        'actions' => array(
+            'create',
+            'index'
+        )
+    );
+    
     public function loadCruds()
     {
       $path = APP . 'Config' .DS. 'cruds.php';
@@ -250,8 +257,12 @@ class Admin {
      * @param string $model
      * @return Model
      */
-    public static function introspectModel($model) {
-        return self::cache(array(__METHOD__, $model), function() use ($model) {
+    public static function introspectModel($model) 
+    {
+        $default_admin = self::$_adminDefaults;
+        
+        return self::cache(array(__METHOD__, $model), function() use ($model, $default_admin) 
+        {
             list($plugin, $model, $id, $class) = Admin::parseName($model);
 
             $pluginPath = ($plugin !== 'Core') ? $plugin . '.' : '';
@@ -267,6 +278,9 @@ class Admin {
             $object->Behaviors->load('Utility.Cacheable');
             $object->cacheQueries = false;
             $object->recursive = -1;
+            
+            // Default options
+            $object->admin = array_merge( $default_admin, (array)$object->admin);
 
             if ($plugin !== 'Core') 
             {
@@ -343,9 +357,6 @@ class Admin {
                     }
                   }
                 }
-                
-                
-
               }
               
               foreach( $object->fields as $field => $data)

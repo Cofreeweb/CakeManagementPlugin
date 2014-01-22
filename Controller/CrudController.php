@@ -386,6 +386,7 @@ class CrudController extends ManagementAppController {
     protected function overrideAction($action, $id = null) {
         $overrides = Configure::read('Admin.actionOverrides');
         $model = $this->Model->qualifiedName;
+        
         if (empty($overrides[$model][$action])) {
             return false;
         }
@@ -393,7 +394,7 @@ class CrudController extends ManagementAppController {
         $url = (array) $overrides[$model][$action];
         $url[] = $id;
 
-        $response = $this->requestAction($url, array(
+        $response = $this->requestAction( $url, array(
             'autoRender' => true,
             'bare' => false,
             'return' => true,

@@ -2,9 +2,9 @@
 $this->Admin->setBreadcrumbs($model, $result, $this->action); ?>
 
 <div class="title">
-    <?php echo $this->element('crud/actions'); ?>
+    <?= $this->element('crud/actions'); ?>
 
-    <h2><?php echo $this->Admin->outputIconTitle($model, $this->Admin->getDisplayField($model, $result)); ?></h2>
+    <h2><?= $this->Admin->outputIconTitle( $model, $this->Admin->getDisplayField($model, $result)); ?></h2>
 </div>
 
 <div class="container">
