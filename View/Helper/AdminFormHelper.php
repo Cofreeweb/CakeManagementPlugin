@@ -382,7 +382,7 @@ class AdminFormHelper extends FormHelper
  * @param string $field 
  * @return boolean
  */
-  public function hasTranslation( Model $model, $field)
+  public function hasTranslation( $model, $field)
   {
     $return = $model->Behaviors->hasMethod( 'translateModel') 
         && array_key_exists( Inflector::camelize( Inflector::pluralize( $field)), $model->hasMany);
@@ -506,7 +506,7 @@ EOF;
     $locales = Configure::read( 'Config.languages');
 
     $Language = ClassRegistry::init( 'I18n.Language');
-
+    
     $languages = array();
     
     if( $Language)
