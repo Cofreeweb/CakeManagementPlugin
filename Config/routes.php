@@ -23,7 +23,8 @@ foreach( (array)Configure::read( 'Management.crud') as $model)
 {
   foreach( array( 'index', 'create', 'read', 'update', 'delete') as $action)
   {    
-    Router::connect( '/admin/'. Inflector::tableize( $model) .'/'. $action .'/*', array(
+    $controller = Inflector::tableize( $model);
+    Router::connect( '/admin/'. str_replace( '.', '', $controller) .'/'. $action .'/*', array(
         'admin' => false,
         'plugin' => 'management', 
         'controller' => 'crud',

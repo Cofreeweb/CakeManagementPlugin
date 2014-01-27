@@ -324,17 +324,17 @@ class AdminToolbarComponent extends Component {
             'plugin' => 'management',
             'controller' => 'crud',
             'action' => $action,
-            'model' => $model->alias
+            'model' => $this->Controller->request->params ['model']
         );
 
         switch ($action) {
             case 'read':
             case 'update':
             case 'delete':
-                $url[] = $model->id;
+                $url[] = !empty( $model->id) ? $model->id : $model->getLastInsertID();
             break;
         }
-
+        
         $this->Controller->redirect($url);
     }
 
