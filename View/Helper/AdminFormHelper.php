@@ -100,7 +100,9 @@ class AdminFormHelper extends FormHelper
         // Añade el input al array de salida
         $out [] = parent::input( $fieldName .'.'. $locale, $options) . '<div class="space-4"></div>';
       }
-      
+
+      $out [] = $this->error( $fieldName);
+
       return implode( "\n", $out);
     }
     else

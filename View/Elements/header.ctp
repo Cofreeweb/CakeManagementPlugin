@@ -34,7 +34,7 @@
 				</li>
 				<li>
 					<a href="<?= $this->Html->url( array(
-					  'admin' => false,
+					  'admin' => true,
 					  'plugin' => 'acl',
 					  'controller' => 'users',
 					  'action' => 'logout'
