@@ -183,3 +183,8 @@ input[type=checkbox].ace.ace-switch.ace-switch-5:checked + .lbl::before {
 .margin-top {
   margin-top: 2em;
 }
+
+/** Comentarios*/
+td .editable-inline {
+  position: absolute;
+}

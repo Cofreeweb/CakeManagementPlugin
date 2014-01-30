@@ -92,7 +92,7 @@ class CrudController extends ManagementAppController {
                 // $this->AdminToolbar->logAction(ActionLog::CREATE, $this->Model, $this->Model->id);
 
                 $this->AdminToolbar->setFlashMessage(__d('admin', 'Successfully created a new %s', mb_strtolower($this->Model->singularName)));
-                $this->AdminToolbar->redirectAfter($this->Model);
+                $this->AdminToolbar->redirectAfter($this->Model, 'update');
 
             } else {
                 $this->AdminToolbar->setFlashMessage(__d('admin', 'Failed to create a new %s', mb_strtolower($this->Model->singularName)), 'is-error');
@@ -175,7 +175,7 @@ class CrudController extends ManagementAppController {
           } 
           else 
           {
-              $this->Manager->flashError( __d('admin', 'No ha podido guardarse el contenido'));
+            $this->Manager->flashError( __d('admin', 'No ha podido guardarse el contenido'));
           }
         } 
         else 

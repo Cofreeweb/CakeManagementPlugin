@@ -72,7 +72,7 @@ $this->Paginator->options(array(
                               			  ), array(
                               			      'class' => 'btn btn-xs btn-danger',
                               			      'escape' => false
-                              			  ), __( "¿Estás seguro de que quieres borrarlo?")) ?>
+                              			  ), __d( 'admin', "¿Estás seguro de que quieres borrarlo?")) ?>
                         						</div>
                               </td>
 

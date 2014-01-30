@@ -43,7 +43,7 @@ class Admin {
           }
         }
       }
-      
+
       $config = Configure::read( 'cruds');
       Configure::write( 'Management.crud', $config);
     }
