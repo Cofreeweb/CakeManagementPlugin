@@ -60,7 +60,7 @@ class AdminFormHelper extends FormHelper
     
     // Verifica si el campo es traducible
     // Si lo es le coloca el idioma dentro 
-    if( $this->hasTranslation( $model, $this->field()))
+    if( is_object( $model) && $this->hasTranslation( $model, $this->field()))
     {
       // Guarda el between para luego modificarlo en cada idioma
       $between = $options ['between'];
