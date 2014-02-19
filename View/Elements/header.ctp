@@ -14,6 +14,7 @@
 		<li class="light-blue">
 			<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 				<span class="user-info">
+					<small><?= __("Hola,") ?></small>
 					<?= $this->Auth->user( 'name') ?>
 				</span>
 

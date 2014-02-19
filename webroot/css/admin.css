@@ -13,6 +13,15 @@
 
 table a{color: rgb(112, 112, 112)}
 
+.rowed {padding: 0 0 5px 0}
+.rowed.header {margin-bottom: 4px; margin-top: 0;}
+	
+.rowed:before, .rowed:after {
+	display: table;
+	content: " ";
+	clear: both;
+}
+
 /* Botones de acciones */
 .header-actions {margin-left: 25px}
 
