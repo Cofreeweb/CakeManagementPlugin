@@ -26,7 +26,8 @@
       '/management/css/ace-rtl',
       '/management/css/ace-skins.min',
       '/management/css/dropzone.css',
-      '/management/css/admin.css'
+      '/management/css/admin.css',
+      '/management/css/magnific-popup.css'
     )) ?>
     
     
@@ -166,7 +167,8 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
       '/management/js/x-editable/bootstrap-editable.min.js',
       '/management/js/x-editable/ace-editable.min.js',
       '/management/js/select2.min.js',
-      '/management/js/jquery.nestable.min.js'
+      '/management/js/jquery.nestable.min.js',
+      '/management/js/jquery.magnific-popup.min.js'
     )) ?>
     
 
@@ -195,6 +197,14 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
       }).next().on(ace.click_event, function(){
 				$(this).prev().focus();
 			});
+			
+			$(".magnific-group").magnificPopup({
+			  delegate: 'a.magnific',
+			  type: 'image',
+			  gallery: {
+          enabled:true
+        }
+			})
     </script>
     <?= $this->fetch( 'script') ?>
     <?= $this->fetch( 'scripts') ?>
