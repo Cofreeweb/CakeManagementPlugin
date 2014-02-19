@@ -1,18 +1,8 @@
-
-img{max-width: 100%}
-
 /* Override Bootsrap*/
-.page-header {margin:0}
-
-.row {
-  margin-right: 0;
-  margin-left: 0;
-}
 
 .margin-b-1 {
   margin-bottom: 1em;
 }
-
 
 .pointer {
   cursor: pointer;
@@ -26,6 +16,18 @@ table a{color: rgb(112, 112, 112)}
 /* Botones de acciones */
 .header-actions {margin-left: 25px}
 
+/* Mapas */
+
+.map-box{
+	width: 100%;
+}
+
+.map-box img {
+	max-width: 500000px !important;
+	width: auto !important;
+}
+
+
 /* Botones de idiomas */
 
 /* Idiomas */
@@ -35,10 +37,14 @@ table a{color: rgb(112, 112, 112)}
 	background-color: #eff3f8;
   padding: 0;
   display: block;
-	margin: 12px;
+	margin: -12px 0 12px 0;
 }
 
 	.page-language .col-sm-2{margin-top: 8px}
+
+/* Datos tabulares */
+
+.profile-user-info {margin: 0}
 
 /* AMARILLO / ESPAÑOL */
 .btn-yellow,
