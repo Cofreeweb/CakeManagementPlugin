@@ -345,6 +345,7 @@ class Admin {
                     if( $field == $info ['foreignKey'])
                     {
                       $data ['type'] = 'list';
+                      $data ['belongsTo'] = $_model;
                       $data ['options'] = $object->$_model->find( 'list', $info);
 
                       if( ($data ['title'] == Inflector::humanize( $field) || empty( $data ['title'])) && isset( $object->$_model->admin ['nameSingular']))
