@@ -1,1 +1,1 @@
-<span class="type text"><?= $result [$data ['belongsTo']][$model->{$data ['belongsTo']}->displayField] ?></span>
+<span class="type text"><?= h( $result [$data ['belongsTo']][$model->{$data ['belongsTo']}->displayField]) ?></span>
