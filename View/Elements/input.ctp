@@ -33,19 +33,12 @@ if ($validate) {
     }
 } ?>
 
-    <?php
 
-    if (!empty($data['belongsTo'])) {
-        $label .= ' <span class="fa fa-search js-tooltip" data-tooltip="' . __d('admin', 'Belongs To Lookup') . '"></span>';
-    } ?>
 
         <?php
         $element = 'default';
 
-        if (!empty($data['belongsTo'])) {
-            $element = 'belongs_to';
-
-        } else if (!empty($data['habtm'])) {
+        if (!empty($data['habtm'])) {
             $element = 'has_and_belongs_to_many';
 
         } else if ($field === 'id') {
