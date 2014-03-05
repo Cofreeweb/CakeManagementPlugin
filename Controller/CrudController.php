@@ -211,18 +211,13 @@ class CrudController extends ManagementAppController {
             throw new NotFoundException(__d('admin', '%s Not Found', $this->Model->singularName));
         }
 
-        if ($this->request->is('post')) {
-            if ($this->Model->delete($id, true)) {
-                $this->AdminToolbar->logAction(ActionLog::DELETE, $this->Model, $id);
+        if ($this->Model->delete($id, true)) {
+            $this->Manager->flashSuccess( __d('admin', 'El contenido se ha borrado correctamente'));
+            $this->AdminToolbar->redirectAfter( $this->Model, 'index');
 
-                $this->AdminToolbar->setFlashMessage(__d('admin', 'Successfully deleted %s with ID %s', array(mb_strtolower($this->Model->singularName), $id)));
-                $this->AdminToolbar->redirectAfter($this->Model);
-
-            } else {
-                $this->AdminToolbar->setFlashMessage(__d('admin', 'Failed to delete %s with ID %s', array(mb_strtolower($this->Model->singularName), $id)), 'is-error');
-            }
+        } else {
+            $this->AdminToolbar->setFlashMessage(__d('admin', 'Failed to delete %s with ID %s', array(mb_strtolower($this->Model->singularName), $id)), 'is-error');
         }
-
         $this->set('result', $result);
         $this->overrideView('delete');
     }
