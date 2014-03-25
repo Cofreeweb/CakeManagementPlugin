@@ -301,7 +301,7 @@ class Admin {
 
             // Generate a list of field (database column) data
             $schema = $object->schema();
-            
+
             foreach( $schema as $key => $data)
             {
               $schema [$key]['title'] = Inflector::humanize( $key);
