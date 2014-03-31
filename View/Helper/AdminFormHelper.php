@@ -422,12 +422,11 @@ class AdminFormHelper extends FormHelper
                 )
             ),
             array(
-                'name' => 'links',
+                'name' => 'insert',
                 'items' => array(
-                    'Link', 'Unlink'
+                    'Link', 'Unlink', 'addImage', 'addFile'
                 )
             ),
-            
             array(
                 'name' => 'styles',
                 'items' => array(
