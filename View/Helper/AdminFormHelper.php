@@ -422,11 +422,12 @@ class AdminFormHelper extends FormHelper
                 )
             ),
             array(
-                'name' => 'insert',
+                'name' => 'links',
                 'items' => array(
-                    'Link', 'Unlink', 'addImage', 'addFile'
+                    'Link', 'Unlink'
                 )
             ),
+            
             array(
                 'name' => 'styles',
                 'items' => array(
@@ -466,7 +467,8 @@ class AdminFormHelper extends FormHelper
     );
     
     $options = array_merge( $_options, $options);
-
+    
+    
     // El ID al estilo Cake
     $id = $class = Inflector::camelize( str_replace( '.', '_', $field));
 
@@ -479,7 +481,6 @@ class AdminFormHelper extends FormHelper
     ));
     
     $json = $this->Js->object( $options);
-    
     
     $js = <<<EOF
     $(".$class").ckeditor($json);
