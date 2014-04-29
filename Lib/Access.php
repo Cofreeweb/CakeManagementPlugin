@@ -152,13 +152,19 @@ class Access
     return $return;
   }  
 
-  public function matchFromKey( $url)
+/**
+ * Dada una URL del frontend, devuelve la Key del acceso
+ *
+ * @param array $url 
+ * @return string
+ */
+  public function findKeyFromFrontUrl( $url)
   {
     if( empty( self::$_config))
     {
       self::loadConfig();
     }
-    
+        
     foreach( self::$_config as $plugin)
     {
       foreach( $plugin as $key => $info)
@@ -170,10 +176,11 @@ class Access
             return $key;
           } 
         }
-        
       }
     }
     
     return false;
   }
+  
+
 }

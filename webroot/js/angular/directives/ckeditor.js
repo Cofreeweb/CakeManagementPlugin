@@ -49,7 +49,7 @@ adminApp.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                             items: [ 'Bold', 'Italic', 'Strike', 'Underline' ] },
                         { name: 'paragraph', items: [ 'BulletedList', 'NumberedList', 'Blockquote' ] },
                         { name: 'editing', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
-                        { name: 'links', items: [ 'Link', 'Unlink', 'Anchor', 'Inlinesave', 'Cancel'] },
+                        { name: 'links', items: [ 'Link', 'Unlink', 'Anchor', 'addImage', 'addFile', 'Inlinesave', 'Cancel'] },
                         { name: 'tools', items: [ 'SpellChecker', 'Maximize'] },
                         '/',
                         { name: 'styles', items: [ 'Format', 'FontSize', 'TextColor', 'PasteText', 'PasteFromWord', 'RemoveFormat' ] },

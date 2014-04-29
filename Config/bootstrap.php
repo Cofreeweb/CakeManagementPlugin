@@ -31,7 +31,7 @@ if (!defined('ADMIN_DATABASE')) {
 /**
  * Name of the application.
  */
-Configure::write('Admin.appName', __d('admin', 'Admin'));
+Configure::write('Admin.appName', 'Admin');
 
 /**
  * Pseudo plugin name to wrap application models in.
@@ -172,22 +172,22 @@ Configure::write('Admin.uploads.validation', array('required' => true));
  */
 Configure::write('Admin.menu', array(
     'acl' => array(
-        'title' => __d('admin', 'ACL'),
+        'title' => 'ACL',
         'url' => array('plugin' => 'admin', 'controller' => 'acl', 'action' => 'index'),
         'count' => ''
     ),
     'logs' => array(
-        'title' => __d('admin', 'Logs'),
+        'title' => 'Logs',
         'url' => array('plugin' => 'admin', 'controller' => 'logs', 'action' => 'index'),
         'count' => ''
     ),
     'reports' => array(
-        'title' => __d('admin', 'Reports'),
+        'title' => 'Reports',
         'url' => array('plugin' => 'admin', 'controller' => 'reports', 'action' => 'index'),
         'count' => ''
     ),
     'upload' => array(
-        'title' => __d('admin', 'Upload'),
+        'title' => 'Upload',
         'url' => array('plugin' => 'admin', 'controller' => 'upload', 'action' => 'index'),
         'count' => ''
     )

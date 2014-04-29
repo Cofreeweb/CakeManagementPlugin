@@ -180,3 +180,44 @@ adminApp.directive('ngConfirmClick', [
     }
   }
 ]);
+
+/**
+* deleteContent directive
+*
+* Se encarga de generar un botón que al hacer click va a mostrar un cuadro de Confirm 
+* y al aceptar va enviar un post a una URL dada, junto con un id
+* También borrará, si existe, el elemento del DOM
+* Opcionalmente, se puede pasar un mensaje para mostrar en el cuadro de confirm
+* 
+* @example <span delete-content="/url/to/delete" data-id="12" data-msg="¿Seguro que quieres borrar este contenido">Borrar</span>
+*/
+adminApp.directive( 'deleteContent', function( $document, $http, $rootScope, $dialogs){
+  return {
+    restrict: 'A',
+    link: function( scope, element, attr, ctrl){
+      element.on( 'click', function(e) {
+        var header = attr.header || '¿Estás seguro';
+        var msg = attr.msg || '';
+        var dlg = $dialogs.confirm( header, msg);
+        dlg.result.then( function( btn){
+          // Si hay url, entonces se envia un post
+          if( attr.deleteContent) {
+            $http.post( attr.deleteContent, {id: attr.id}).success( function( data){
+              if( data.success) {
+                angular.element( attr.remove).remove();
+              }
+            })
+          } else {
+            // Borra el elemento del scope, si es que se ha dado
+            if( attr.deleteScope && attr.deleteScopeIndex) {
+              var cod = 'scope.' + attr.deleteScope + '.splice(' + attr.deleteScopeIndex +', 1)';
+              eval( cod);
+            }
+            angular.element( attr.remove).remove();
+          }
+          
+        });
+      })
+    }
+  }
+});
