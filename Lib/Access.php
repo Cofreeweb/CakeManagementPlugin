@@ -84,6 +84,23 @@ class Access
     return $return;
   }
   
+  public function getAllPermissions()
+  {
+    $options = self::getAllOptions();
+    
+    return Hash::extract( $options, '{n}.id');
+  }
+  
+  public function getUserPermissions( $permissions)
+  {
+    if( in_array( '*', $permissions))
+    {
+      return self::getallPermissions();
+    }
+    
+    return $permissions;
+  }
+  
   public function getPermission( $key)
   {
     if( empty( self::$_config))
