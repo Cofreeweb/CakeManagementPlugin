@@ -17,7 +17,7 @@
 
           <? foreach( $model->admin ['fieldsSearch'] as $field => $data): ?>
               <? $data ['empty'] = __d( 'admin', '-- Todos --') ?>
-              
+
               <?= $this->element( 'Management.input', array(
                   'field' => $field,
                   'data' => $data
@@ -27,6 +27,18 @@
         <?= $this->Form->end() ?>
       </div>
     </div>
+      <div class="widget-main">
+        <?= $this->Form->input( 'Acciones múltiples', array(
+          'type' => 'select',
+          'empty' => 'Selecciona una acción',
+          'options' => array(
+            'delete' => 'Borrar',
+          ),
+          'id' => 'multiselect'
+        ));?>
+      </div>
+
+
   </div>
 </div>
 

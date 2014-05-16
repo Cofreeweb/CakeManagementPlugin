@@ -6,11 +6,10 @@
 
 		<meta name="description" content="Common form elements and layouts" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <?= $this->fetch( 'css') ?>
-    
-		<!-- basic styles -->
 
+    <?= $this->fetch( 'css') ?>
+
+		<!-- basic styles -->
     <?= $this->Html->css( array(
       '/management/css/bootstrap.min',
       '/management/css/font-awesome',
@@ -29,14 +28,12 @@
       '/management/css/admin.css',
       '/management/css/magnific-popup.css'
     )) ?>
-    
-    
+
 		<!--[if IE 7]>
     <?= $this->Html->css( array(
       '/management/css/font-awesome-ie7.min',
     )) ?>
 		<![endif]-->
-
 
 		<!--[if lte IE 8]>
     <?= $this->Html->css( array(
@@ -56,55 +53,58 @@
       '/management/css/respond.min'
     )) ?>
 		<![endif]-->
+
+    <script type="text/javascript">
+      window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'management/js/jquery-2.0.3.min.js') ?>'>"+"<"+"/script>");
+    </script>
+
 	</head>
 
 	<body class="navbar-fixed">
 	  <?= $this->Session->flash() ?>
 		<div class="navbar navbar-default navbar-fixed-top" id="navbar">
-	    
-	    <?= $this->append( 'scripts') ?>
-  			<script type="text/javascript">
-  				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-  				// Vamos a dar la opción al usuario de cambiar la forma de visualización? Este script es para eso, no?
-  			</script>
-      <?= $this->end() ?>
+
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+				// Vamos a dar la opción al usuario de cambiar la forma de visualización? Este script es para eso, no?
+			</script>
+
 			<div class="navbar-container" id="navbar-container">
 				<?= $this->element( 'header') ?>
 			</div>
 		</div>
-    
+
 		<div class="main-container" id="main-container">
-		  <?= $this->append( 'scripts') ?>
-  			<script type="text/javascript">
-  				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-  			</script>
-      <?= $this->end() ?>
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
 			<div class="main-container-inner">
 				<a class="menu-toggler" id="menu-toggler" href="#"><span class="menu-text"></span></a>
 
 				<div class="sidebar sidebar-fixed" id="sidebar">
 					<?= $this->element( 'menu') ?>
 				</div>
-        
+
 				<div class="main-content">
-					
+
 					<div class="page-content">
-					
+
 						<div class="page-header">
-					
+
 							<h1><?= isset( $adminTitle) ? $adminTitle : ucfirst( $this->request->controller) ?>
 						  <? if( isset( $adminSubtitle)): ?>
 						     <small><i class="icon-double-angle-right"></i> <?= $adminSubtitle ?></small>
-						  <? endif ?>																
+						  <? endif ?>
 							<span class="header-actions">
 								<?= $this->element( 'actions', array(
                		'plugin' => 'Management'
               	)) ?>
 							</span></h1>
 						</div>
-					
+
 						<?= $this->fetch( 'content')?>
-					
+
 					</div>
 				</div><!-- /.main-content -->
 
@@ -117,11 +117,9 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'management/js/jquery-2.0.3.min.js') ?>'>"+"<"+"/script>");
 		</script>
-
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -131,11 +129,9 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='<?= $this->Html->webroot( 'management/js/jquery.mobile.custom.min.js') ?>'>"+"<"+"/script>");0
-			
-			
+			if("ontouchend" in document) document.write("<script src='<?= $this->Html->webroot( 'management/js/jquery.mobile.custom.min.js') ?>'>"+"<"+"/script>");
 		</script>
-    
+
     <?= $this->Html->script( array(
       '/management/js/bootstrap.min',
       '/management/js/typeahead-bs2.min'
@@ -148,7 +144,7 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
       '/management/js/excanvas.min',
     )) ?>
 		<![endif]-->
-    
+
     <?= $this->Html->script( array(
       '/management/js/jquery-ui-1.10.3.custom.min',
       '/management/js/jquery.ui.touch-punch.min',
@@ -172,16 +168,15 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
       '/management/js/jquery.nestable.min.js',
       '/management/js/jquery.magnific-popup.min.js'
     )) ?>
-    
+
 
 		<!-- ace scripts -->
-    
     <?= $this->Html->script( array(
       '/management/js/ace-elements.min',
       '/management/js/ace.min',
       '/management/js/ace-extra.min'
     )) ?>
-    
+
 		<!-- inline scripts related to this page -->
     <script type="text/javascript">
       //editables on first profile page
@@ -189,17 +184,17 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
 			$.fn.editableform.loading = "<div class='editableform-loading'><i class='light-blue icon-2x icon-spinner icon-spin'></i></div>";
 		  $.fn.editableform.buttons = '<button type="submit" class="btn btn-info editable-submit"><i class="icon-ok icon-white"></i></button>'+
 		                                '<button type="button" class="btn editable-cancel"><i class="icon-remove"></i></button>';
-		                                
+
       $('[data-rel=tooltip]').tooltip({container:'body'});
       $('[data-rel=popover]').popover({container:'body'});
       $('.date-picker').datepicker({
-          autoclose:true, 
-          format: 'yyyy-mm-dd', 
+          autoclose:true,
+          format: 'yyyy-mm-dd',
           language: 'es'
       }).next().on(ace.click_event, function(){
 				$(this).prev().focus();
 			});
-			
+
 			$(".magnific-group").magnificPopup({
 			  delegate: 'a.magnific',
 			  type: 'image',
@@ -212,7 +207,7 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
     <?= $this->fetch( 'scripts') ?>
     <?= $this->fetch( 'css') ?>
     <?= $this->Js->writeBuffer() ?>
-		
-		<?= $this->element('sql_dump'); ?>
-	
+
+		<?//= $this->element('sql_dump'); ?>
+
 </html>

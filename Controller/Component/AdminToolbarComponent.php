@@ -31,7 +31,7 @@ class AdminToolbarComponent extends Component {
         $this->Controller = $controller;
 
         // Thrown an exception if accessing an override action without requestAction()
-        if (substr($controller->action, 0, 6) === 'admin_' && empty($controller->request->params['override'])) {
+        if (substr($controller->action, 0, 6) === 'admin_' && empty($controller->request->params['override']) && !in_array( $controller->action, $controller->allowAdminActions) ) {
             throw new ForbiddenException();
         }
 
@@ -257,7 +257,7 @@ class AdminToolbarComponent extends Component {
       $fields = $model->fields;
       $alias = $model->alias;
       $enum = $model->enum;
-      
+
       foreach ($data as $key => $value) {
           if (mb_substr($key, -7) === '_filter' || mb_substr($key, -11) === '_type_ahead') {
               $data[$key] = urldecode($value);
@@ -270,11 +270,11 @@ class AdminToolbarComponent extends Component {
           $field = $fields[$key];
           $value = urldecode($value);
           $db = $model->getDataSource();
-          
+
           $LIKE = strpos( $db->description, 'PostgreSQL') !== false
               ? 'ILIKE'
               : 'LIKE';
-              
+
           // Dates, times, numbers
           if (isset($data[$key . '_filter'])) {
               $operator = $data[$key . '_filter'];
@@ -334,7 +334,7 @@ class AdminToolbarComponent extends Component {
                 $url[] = !empty( $model->id) ? $model->id : $model->getLastInsertID();
             break;
         }
-        
+
         $this->Controller->redirect($url);
     }
 

@@ -9,7 +9,10 @@ App::uses( 'ManagementAppController', 'Management.Controller');
 App::uses( 'Admin', 'Management.Lib');
 
 
-class CrudController extends ManagementAppController { 
+class CrudController extends ManagementAppController {
+
+    // Disable AdminToolBar forbbiden exception for specific functions
+    public $allowAdminActions = array( 'admin_multiactions');
 
     /**
      * List out and paginate all the records in the model.
@@ -18,7 +21,7 @@ class CrudController extends ManagementAppController {
         if ($this->overrideAction('index')) {
             return;
         }
-        
+
         $this->paginate = array_merge(array(
             'limit' => 25,
             'order' => array($this->Model->alias . '.' . $this->Model->displayField => 'ASC'),
@@ -31,7 +34,7 @@ class CrudController extends ManagementAppController {
         if (!empty($this->request->query)) {
             $this->paginate['conditions'] = $this->AdminToolbar->parseFilterConditions($this->Model, $this->request->query);
         }
-        
+
         // Batch delete
         if ($this->request->is('post')) {
             if (!$this->Model->admin['batchProcess']) {
@@ -79,7 +82,7 @@ class CrudController extends ManagementAppController {
         if ($this->overrideAction('create')) {
             return;
         }
-        
+
         $this->AdminToolbar->setBelongsToData($this->Model);
         $this->AdminToolbar->setHabtmData($this->Model);
 
@@ -137,14 +140,14 @@ class CrudController extends ManagementAppController {
      * @throws NotFoundException
      * @throws ForbiddenException
      */
-    public function update($id) 
+    public function update($id)
     {
-        if (!$this->Model->admin['editable']) 
+        if (!$this->Model->admin['editable'])
         {
           throw new ForbiddenException(__d('admin', 'Update Access Protected'));
         }
 
-        if ($this->overrideAction('update', $id)) 
+        if ($this->overrideAction('update', $id))
         {
           return;
         }
@@ -153,7 +156,7 @@ class CrudController extends ManagementAppController {
 
         $result = $this->AdminToolbar->getRecordById($this->Model, $id, true);
 
-        if (!$result) 
+        if (!$result)
         {
           throw new NotFoundException(__d('admin', '%s Not Found', $this->Model->singularName));
         }
@@ -161,24 +164,24 @@ class CrudController extends ManagementAppController {
         $this->AdminToolbar->setBelongsToData($this->Model);
         $this->AdminToolbar->setHabtmData($this->Model);
 
-        if ($this->request->is('put')) 
+        if ($this->request->is('put'))
         {
           $data = $this->AdminToolbar->getRequestData();
 
-          if ($this->Model->saveAll($data, array('validate' => 'first', 'atomic' => true, 'deep' => true))) 
+          if ($this->Model->saveAll($data, array('validate' => 'first', 'atomic' => true, 'deep' => true)))
           {
             $this->Model->set($result);
             // $this->AdminToolbar->logAction(ActionLog::UPDATE, $this->Model, $id);
 
             $this->Manager->flashSuccess( __d('admin', 'El contenido se ha guardado correctamente'));
             $this->AdminToolbar->redirectAfter($this->Model, 'update');
-          } 
-          else 
+          }
+          else
           {
             $this->Manager->flashError( __d('admin', 'No ha podido guardarse el contenido'));
           }
-        } 
-        else 
+        }
+        else
         {
           $this->request->data = $result;
         }
@@ -340,7 +343,7 @@ class CrudController extends ManagementAppController {
     public function beforeFilter() {
         parent::beforeFilter();
         App::uses( 'Admin', 'Management.Lib');
-        
+
         // Introspect model
         if (isset($this->params['model'])) {
             $this->Model = Admin::introspectModel($this->params['model']);
@@ -366,8 +369,13 @@ class CrudController extends ManagementAppController {
             $this->request->data = $data;
         }
 
+
+        $this->Security->unlockedActions = array( 'admin_multiactions');
+
+
         // Don't validate post since data changes constantly
         $this->Security->validatePost = false;
+
     }
 
     /**
@@ -381,11 +389,11 @@ class CrudController extends ManagementAppController {
     protected function overrideAction($action, $id = null) {
         $overrides = Configure::read('Admin.actionOverrides');
         $model = $this->Model->qualifiedName;
-        
+
         if (empty($overrides[$model][$action])) {
             return false;
         }
-        
+
         $url = (array) $overrides[$model][$action];
         $url[] = $id;
 
@@ -434,6 +442,72 @@ class CrudController extends ManagementAppController {
         $this->request->params['override'] = true;
 
         $this->render();
+    }
+
+    /**
+     * multiactions function
+     *
+     * @param $action string, $model string, $data multitype
+     * @return boolean
+     * @author cofreeweb
+     *
+     **/
+    public function admin_multiactions()
+    {
+      $this->autoRender = false;
+
+      if( $this->request->is('ajax'))
+      {
+        // Set the vars from ajax request
+        $multiaction = $this->data['multiaction'];
+        $model = $this->data['model'];
+        $ids = $this->data['ids'];
+
+        // Load the model to use form delete
+        $this->loadModel( $model);
+
+        // Execute the specific action
+        if( !empty( $multiaction) && !empty( $model) && !empty( $ids))
+        {
+          switch( $multiaction)
+          {
+            case 'deleteSelected':
+              $c = 0;
+              foreach( $ids as $key => $id)
+              {
+                if( !$this->$model->delete( $id))
+                {
+                  $c = $c + 1;
+                }
+              }
+              if( $c == 0) {
+                return true;
+              } else {
+                  return false;
+                }
+            break;
+
+            case 'deleteAll':
+              if( !$this->$model->deleteAll( array( '1 = 1')))
+              {
+                $c = $c + 1;
+              }
+              if( $c == 0) {
+                return true;
+              } else {
+                  return false;
+                }
+            break;
+          }
+
+        }
+        else {
+          throw new ForbiddenException(__d( 'admin', 'Invalid Params'));
+        }
+      }
+      else {
+        throw new ForbiddenException(__d( 'admin', 'Invalid Request'));
+      }
     }
 
 }
