@@ -27,17 +27,19 @@
         <?= $this->Form->end() ?>
       </div>
     </div>
-      <div class="widget-main">
-        <?= $this->Form->input( 'Acciones múltiples', array(
-          'type' => 'select',
-          'empty' => 'Selecciona una acción',
-          'options' => array(
-            'delete' => 'Borrar',
-          ),
-          'id' => 'multiselect'
-        ));?>
-      </div>
 
+      <? if ( $model->admin['batchProcess']): ?>
+        <div class="widget-main">
+          <?= $this->Form->input( 'Acciones múltiples', array(
+            'type' => 'select',
+            'empty' => 'Selecciona una acción',
+            'options' => array(
+              'delete' => 'Borrar',
+            ),
+            'id' => 'multiselect'
+          ));?>
+        </div>
+      <? endif ?>
 
   </div>
 </div>
