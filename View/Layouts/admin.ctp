@@ -61,22 +61,24 @@
 	<body class="navbar-fixed">
 	  <?= $this->Session->flash() ?>
 		<div class="navbar navbar-default navbar-fixed-top" id="navbar">
-	
-			<script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-				// Vamos a dar la opción al usuario de cambiar la forma de visualización? Este script es para eso, no?
-			</script>
-
+	    
+	    <?= $this->append( 'scripts') ?>
+  			<script type="text/javascript">
+  				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+  				// Vamos a dar la opción al usuario de cambiar la forma de visualización? Este script es para eso, no?
+  			</script>
+      <?= $this->end() ?>
 			<div class="navbar-container" id="navbar-container">
 				<?= $this->element( 'header') ?>
 			</div>
 		</div>
-
+    
 		<div class="main-container" id="main-container">
-			<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
-
+		  <?= $this->append( 'scripts') ?>
+  			<script type="text/javascript">
+  				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+  			</script>
+      <?= $this->end() ?>
 			<div class="main-container-inner">
 				<a class="menu-toggler" id="menu-toggler" href="#"><span class="menu-text"></span></a>
 

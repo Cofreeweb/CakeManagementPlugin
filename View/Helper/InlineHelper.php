@@ -123,8 +123,8 @@ class InlineHelper extends AppHelper
         'action' => $this->request->params ['action'],
     ));
     
-    $user_permissions = $this->Auth->user( 'Group.permissions');
-    
+    $user_permissions = Access::getUserPermissions( $this->Auth->user( 'Group.permissions'));
+        
     if( $user_permissions)
     {
       foreach( $user_permissions as $permission)
@@ -147,7 +147,6 @@ class InlineHelper extends AppHelper
       if( in_array( $current_permission, $user_permissions))
       {
         $info = Access::getPermission( $current_permission);
-        
         
         // Enlaces que se mostrarán en los contenidos públicos (no en modo edición)
         if( !$this->isModeEditor() && isset( $info ['adminLinks']['noEdit']))

@@ -7,7 +7,7 @@
   <?= $this->AdminNav->setActionButtons( $model->admin ['actions']) ?>
 <? endif ?>
 <?#= $this->Admin->setBreadcrumbs($model, $result, $this->action) ?>
-
+<?= $this->Form->localeNav() ?>
 
 <div class="row">
   <div class="col-md-12">
