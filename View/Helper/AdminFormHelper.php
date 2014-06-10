@@ -85,7 +85,7 @@ class AdminFormHelper extends FormHelper
           $options ['div']['class'] .= ' hidden';
         }
 
-        if( !empty( $values))
+        if( !empty( $values) && isset( $values [$locale]))
         {
           $options ['value'] = $values [$locale];
         }
