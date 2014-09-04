@@ -10,7 +10,7 @@
 class AdminUtilHelper extends AppHelper 
 {
 
-  public $helpers = array('Html', 'Form');
+  public $helpers = array('Html', 'Form', 'Time');
   
 /**
  * Devuelve una URL para el admin, dado unos parámetros
@@ -45,6 +45,38 @@ class AdminUtilHelper extends AppHelper
     }
 
     return array_merge( $defaults, $params);
+  }
+
+/**
+ * Devuelve la fecha con un formato
+ * @param  string  $date   La fecha
+ * @param  mixed $format El formato
+ * @return string          
+ */
+  public function date( $date, $format = false)
+  {
+    if( !$format) 
+    {
+      $format = __d( 'admin', '%d/%m/%Y');
+    }
+
+    return $this->Time->format( $date, $format);
+  }
+
+/**
+ * Devuelve la fecha y hora con un formato
+ * @param  string  $date   La fecha
+ * @param  mixed $format El formato
+ * @return string          
+ */
+  public function datetime( $date, $format = false)
+  {
+    if( !$format) 
+    {
+      $format = __d( 'admin', '%d/%m/%Y %H:%M:%S');
+    }
+
+    return $this->Time->format( $date, $format);
   }
   
 }

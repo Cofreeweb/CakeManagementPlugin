@@ -121,7 +121,16 @@ class AdminNavHelper extends AppHelper
         
         if( isset( $el ['icon']))
         {
-          $a [] = '<i class="icon-'. $el ['icon'] .'"></i>';
+          if( strpos( $el ['icon'], 'fa') === false) 
+          {
+            $el ['icon'] = 'icon-'. $el ['icon'];
+          }
+          else
+          {
+            $el ['icon'] = 'fa '. $el ['icon'];
+          }
+
+          $a [] = '<i class="'. $el ['icon'] .'"></i>';
         }
         
         $a [] = '<span class="menu-text">'. $el ['label'] .'</span>';
@@ -292,5 +301,10 @@ class AdminNavHelper extends AppHelper
     {
       
     }
+  }
+
+  public function setSaveButton( $id = '#form-main')
+  {
+    $this->_View->set( 'save_button', $id);
   }
 }

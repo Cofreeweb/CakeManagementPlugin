@@ -11,23 +11,10 @@
 
 		<!-- basic styles -->
     <?= $this->Html->css( array(
-      '/management/css/bootstrap.min',
-      '/management/css/font-awesome',
-      '/management/css/jquery-ui-1.10.3.custom.min',
-      '/management/css/chosen',
-      '/management/css/datepicker',
-      '/management/css/bootstrap-timepicker',
-      '/management/css/bootstrap-editable',
-      '/management/css/daterangepicker',
-      '/management/css/colorpicker',
-      '/management/css/ace-fonts',
-      '/management/css/ace',
-      '/management/css/ace-rtl',
-      '/management/css/ace-skins.min',
-      '/management/css/dropzone.css',
-      '/management/css/admin.css',
-      '/management/css/magnific-popup.css'
+      'main.css'
     )) ?>
+
+
 
 		<!--[if IE 7]>
     <?= $this->Html->css( array(
@@ -166,6 +153,7 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
       '/management/js/x-editable/ace-editable.min.js',
       '/management/js/select2.min.js',
       '/management/js/jquery.nestable.min.js',
+      '/management/js/jquery.mjs.nestedSortable.js',
       '/management/js/jquery.magnific-popup.min.js'
     )) ?>
 
@@ -203,6 +191,9 @@ window.jQuery || document.write("<script src='<?= $this->Html->webroot( 'managem
         }
 			})
     </script>
+
+    <?= $this->fetch( 'scriptsBottom') ?>
+
     <?= $this->fetch( 'script') ?>
     <?= $this->fetch( 'scripts') ?>
     <?= $this->fetch( 'css') ?>

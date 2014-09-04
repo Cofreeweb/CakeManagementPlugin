@@ -1478,3 +1478,9 @@ a .icon-flip-vertical:before {
 .icon-renren:before {
   content: "\f18b";
 }
+.icon-cutlery:before {
+  content: "\f0f5";
+}
+.icon-arrows:before {
+  content: "\f047";
+}
