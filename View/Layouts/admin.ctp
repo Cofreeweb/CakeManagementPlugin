@@ -11,7 +11,22 @@
 
 		<!-- basic styles -->
     <?= $this->Html->css( array(
-      'main.css'
+       '/management/css/bootstrap.min',
+        '/management/css/font-awesome',
+        '/management/css/jquery-ui-1.10.3.custom.min',
+        '/management/css/chosen',
+        '/management/css/datepicker',
+        '/management/css/bootstrap-timepicker',
+        '/management/css/bootstrap-editable',
+        '/management/css/daterangepicker',
+        '/management/css/colorpicker',
+        '/management/css/ace-fonts',
+        '/management/css/ace',
+        '/management/css/ace-rtl',
+        '/management/css/ace-skins.min',
+        '/management/css/dropzone.css',
+        '/management/css/admin.css',
+        '/management/css/magnific-popup.css'
     )) ?>
 
 
