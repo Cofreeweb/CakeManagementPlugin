@@ -53,6 +53,9 @@ if ($validate) {
         } else if (in_array($data['type'], array('datetime', 'date', 'time'))) {
             $element = 'datetime';
         }
+         else if (in_array($data['type'], array('select'))) { 
+            $element = 'select';
+        }
 
         // Value from named param
         $overwriteValue = null;

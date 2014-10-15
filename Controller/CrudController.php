@@ -86,7 +86,7 @@ class CrudController extends ManagementAppController {
         $this->AdminToolbar->setBelongsToData($this->Model);
         $this->AdminToolbar->setHabtmData($this->Model);
 
-        if ($this->request->is('post')) {
+        if ($this->request->is('post')) { 
             $data = $this->AdminToolbar->getRequestData();
             $this->Model->create();
 
