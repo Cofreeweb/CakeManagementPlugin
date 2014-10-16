@@ -19,10 +19,51 @@ class AdminNavHelper extends AppHelper
   public $isOpen = false;
   
   public $actionButtons = array( 'add', 'index');
+
+  private $__actions = array();
+  
   
   protected $_models = array();
   
+
+  public function __construct(View $View, $settings = array()) 
+  {
+    parent::__construct( $View, $settings);
+
+    $this->__setDefaultActions();
+  }
+
+/**
+ * Marca por defecto las acciones de los botones de la administración
+ * Estas acciones pueden ser modificadas por setAction()
+ *     
+ * @return
+ */
+  private function __setDefaultActions()
+  {
+    $this->__actions = array(
+        'add' => array(
+            'action' => 'add'
+        ),
+        'index' => array(
+            'action' => 'index'
+        ),
+        'create' => array(
+            'action' => 'create'
+        ),
+    );
+  }
   
+  public function setAction( $action, $route)
+  {
+    $this->__actions [$action] = $route;
+  }
+
+  public function getAction( $action)
+  {
+    return $this->__actions [$action];
+  }
+
 /**
  * Guess the location for a model based on its name and tries to create a new instance
  * or get an already created instance of the model
@@ -107,6 +148,16 @@ class AdminNavHelper extends AppHelper
 
     foreach( $els as $el)
     {
+      if( array_key_exists( 'html', $el))
+      {
+        if( $this->hasPermissions( $el ['url']))
+        {
+          $ul [] = $el ['html'];
+        }
+        
+        continue;
+      }
+
       $li = array();
       $url = isset( $el ['url']) ? $el ['url'] : $el;
 
@@ -119,18 +170,9 @@ class AdminNavHelper extends AppHelper
       {
         $a = '';
         
-        if( isset( $el ['icon']))
+        if( $icon = $this->icon( $el))
         {
-          if( strpos( $el ['icon'], 'fa') === false) 
-          {
-            $el ['icon'] = 'icon-'. $el ['icon'];
-          }
-          else
-          {
-            $el ['icon'] = 'fa '. $el ['icon'];
-          }
-
-          $a [] = '<i class="'. $el ['icon'] .'"></i>';
+          $a [] = $icon;
         }
         
         $a [] = '<span class="menu-text">'. $el ['label'] .'</span>';
@@ -174,11 +216,36 @@ class AdminNavHelper extends AppHelper
         'class' => $first ? 'nav nav-list' : 'submenu'
     ));
   }
+  
+/**
+ * Devuelve una etiqueta <i> con el class para el icon
+ * @param  array $el El array del elemento definido en la configuración de la navegación
+ * @param  string $css El CSS extra
+ * @return HTML
+ */
+  public function icon( $el, $css = '')
+  {
+    if( !isset( $el ['icon']))
+    {
+      return false;
+    }
+
+    if( strpos( $el ['icon'], 'fa') === false) 
+    {
+      $el ['icon'] = 'icon-'. $el ['icon'];
+    }
+    else
+    {
+      $el ['icon'] = 'fa '. $el ['icon'];
+    }
+
+    return '<i class="'. $el ['icon'] .' '. $css .'"></i>';
+  }
 
   public function _isCurrentNav( $el, $label, $first, $els)
   {
     $this->isActive = false;
-    
+    $this->isOpen = false;
     $url = isset( $el ['url']) ? $el ['url'] : $el;
 
     if( ($url && $url ['controller'] == $this->request->params ['controller']))
@@ -193,6 +260,11 @@ class AdminNavHelper extends AppHelper
 
       foreach( $els as $key => $el2)
       {
+        if( array_key_exists( 'html', $el2))
+        {
+          continue;
+        }
+
         $url2 = isset( $el2 ['url']) ? $el2 ['url'] : $el2;
         
         if( $key == $label)

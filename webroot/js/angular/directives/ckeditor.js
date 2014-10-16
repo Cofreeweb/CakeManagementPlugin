@@ -67,7 +67,7 @@ adminApp.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
 
                 var instance = (isTextarea) ? CKEDITOR.replace(element[0], options) : CKEDITOR.inline(element[0], options),
                     configLoaderDef = $q.defer();
-
+                
                 element.bind('$destroy', function () {
                     instance.destroy(
                         false //If the instance is replacing a DOM element, this parameter indicates whether or not to update the element with the instance contents.
