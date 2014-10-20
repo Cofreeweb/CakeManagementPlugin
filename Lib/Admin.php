@@ -20,7 +20,7 @@ class Admin {
         )
     );
     
-    public function loadCruds()
+    public static function loadCruds()
     {
       $path = APP . 'Config' .DS. 'cruds.php';
 

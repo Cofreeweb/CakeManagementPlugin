@@ -20,7 +20,7 @@ class AdminUtilHelper extends AppHelper
  * @param array $params 
  * @return array
  */
-  public function url( $params = array())
+  public function url( $params = array(), $full = false)
   {
     $route = Router::requestRoute( true);
 

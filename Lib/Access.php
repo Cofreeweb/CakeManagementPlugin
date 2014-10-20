@@ -17,7 +17,7 @@ class Access
  *
  * @return void
  */
-  public function loadConfig()
+  public static function loadConfig()
   {
     $plugins = App::objects( 'plugin');
     foreach( $plugins as $plugin)
@@ -61,7 +61,7 @@ class Access
  * @return void
  * @example Access::getAllOptions()
  */
-  public function getAllOptions()
+  public static function getAllOptions()
   {
     $return = array();
     
@@ -84,14 +84,14 @@ class Access
     return $return;
   }
   
-  public function getAllPermissions()
+  public static function getAllPermissions()
   {
     $options = self::getAllOptions();
     
     return Hash::extract( $options, '{n}.id');
   }
   
-  public function getUserPermissions( $permissions)
+  public static function getUserPermissions( $permissions)
   {
     if( in_array( '*', $permissions))
     {
@@ -123,7 +123,7 @@ class Access
   }
   
 
-  public function acoFromUrl( $url)
+  public static function acoFromUrl( $url)
   {
     $aco = 'controllers';
     
@@ -146,7 +146,7 @@ class Access
     return $aco;
   }
   
-  public function getAllUrls()
+  public static function getAllUrls()
   {
     if( empty( self::$_config))
     {
