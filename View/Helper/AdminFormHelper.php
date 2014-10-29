@@ -128,7 +128,7 @@ class AdminFormHelper extends FormHelper
  * @param string $label
  * @return HTML
  */
-  public function submit( $label, $options = array())
+  public function submit( $label = null, $options = array())
   {
     $_options = array(
         'class' => 'btn btn-info',
