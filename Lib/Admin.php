@@ -448,7 +448,7 @@ class Admin {
     }
     
     
-    public function modelName( $model)
+    public static function modelName( $model)
     {
       $parents = class_parents( $model);
       

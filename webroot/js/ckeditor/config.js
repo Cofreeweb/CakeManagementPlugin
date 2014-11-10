@@ -7,6 +7,6 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
-	config.extraPlugins = 'inlinesave,cancel,simpleuploads,colordialog,colorbutton,font';
+	config.extraPlugins = 'inlinesave,cancel,simpleuploads,colordialog,colorbutton,font,oembed,widget';
 	config.filebrowserUploadUrl = '/management/fileupload/upload';
 };
