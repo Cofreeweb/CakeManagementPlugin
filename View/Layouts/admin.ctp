@@ -72,7 +72,7 @@
 			</script>
 
 			<div class="navbar-container" id="navbar-container">
-				<?= $this->element( 'header') ?>
+				<?= $this->element( 'Management.header') ?>
 			</div>
 		</div>
 
@@ -85,7 +85,7 @@
 				<a class="menu-toggler" id="menu-toggler" href="#"><span class="menu-text"></span></a>
 
 				<div class="sidebar sidebar-fixed" id="sidebar">
-					<?= $this->element( 'menu') ?>
+					<?= $this->element( 'Management.menu') ?>
 				</div>
 
 				<div class="main-content">
@@ -99,7 +99,7 @@
 						     <small><i class="icon-double-angle-right"></i> <?= $adminSubtitle ?></small>
 						  <? endif ?>
 							<span class="header-actions">
-								<?= $this->element( 'actions', array(
+								<?= $this->element( 'Management.actions', array(
                		'plugin' => 'Management'
               	)) ?>
 							</span></h1>
