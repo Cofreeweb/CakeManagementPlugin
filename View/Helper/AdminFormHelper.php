@@ -437,10 +437,10 @@ class AdminFormHelper extends FormHelper
             array(
                 'name' => 'paragraph',
                 'groups' => array(
-                    'list', 'indent', 'blocks', 'align'
+                    'list', 'indent', 'blocks', 'align',
                 ),
                 'items' => array(
-                    'NumberedList', 'BulletedList'
+                    'NumberedList', 'BulletedList', 'Table'
                 )
             ),
             array(
